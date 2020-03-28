@@ -1,3 +1,4 @@
+<!-- hidden for now
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
@@ -5,15 +6,19 @@
     </ion-title></ion-toolbar
   >
 </ion-header>
+-->
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
+  <!-- hidden for now
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
       <ion-title size="large">Contract Tracer</ion-title>
     </ion-toolbar>
   </ion-header>
+  -->
+
   <!--TODO: show if in close proximity -->
-  <ion-card>
+  <ion-card class="ion-no-margin">
     <ion-card-content>
       <ion-item lines="none">
         <ion-icon name="radio-outline" slot="start"></ion-icon>
@@ -25,26 +30,66 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <ion-card class="status--container">
+  <ion-card class="status--container ion-no-margin ion-margin-top">
     <ion-card-header>
       <!--TODO: set status -->
-      <ion-card-title>Positive</ion-card-title>
+      <ion-card-title> Positive</ion-card-title>
       <ion-card-subtitle>
-        <ion-text color="light">
-          You've been tested positive for Covid-19 on
-          <strong>4th April 2020</strong>
-        </ion-text></ion-card-subtitle
-      >
+        You've been tested positive for Covid-19 on
+        <strong>4th April 2020</strong>
+      </ion-card-subtitle>
     </ion-card-header>
+    <ion-footer>
+      <ion-toolbar class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <ion-button color="primary" size="block" mode="ios"
+              >I test positive</ion-button
+            >
+          </ion-col>
+          <ion-col>
+            <ion-button color="primary" size="block" mode="ios"
+              >I show symptoms</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-footer>
   </ion-card>
-  <ion-row>
-    <ion-col>
-      <ion-button size="block" color="primary">I show symptoms</ion-button>
-    </ion-col>
-    <ion-col>
-      <ion-button size="block" color="primary"
-        >I have been tested positive</ion-button
+  <h6 class="ion-padding-top">What should I do?</h6>
+  <ion-row class="ion-align-items-center ion-padding-bottom">
+    <ion-col size="7" class="ion-no-padding">
+      <h3>Quarantine</h3>
+      <p>
+        You need to stay at home until you don't show any more symptoms for at
+        least 48 hours.
+      </p>
+      <ion-button fill="clear" class="ion-no-padding"
+        >More information</ion-button
       >
     </ion-col>
+    <ion-col size="4" offset="1"> <img src="/assets/img/slide.png"/></ion-col>
+  </ion-row>
+  <h6>Close contact in the last day</h6>
+  <ion-row>
+    <ion-col size="12" class="ion-no-padding"
+      ><h1 class="ion-no-margin">25</h1></ion-col
+    >
+    <ion-col size="12"
+      ><img
+        src="/assets/img/chart-placeholder.svg"
+        style="width:100%;height:auto"
+    /></ion-col>
+  </ion-row>
+  <h6>Close contact in the last 14 days</h6>
+  <ion-row>
+    <ion-col size="12" class="ion-no-padding"
+      ><h1 class="ion-no-margin">491</h1></ion-col
+    >
+    <ion-col size="12"
+      ><img
+        src="/assets/img/chart-placeholder.svg"
+        style="width:100%;height:auto"
+    /></ion-col>
   </ion-row>
 </ion-content>

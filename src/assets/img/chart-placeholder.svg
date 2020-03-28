@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="307px" height="74px" viewBox="0 0 307 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Blue</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#2E5BFF" offset="0%"></stop>
+            <stop stop-color="#2E5BFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Mockups-Medium" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-1115.000000, -524.000000)">
+            <g id="Group-4" transform="translate(305.000000, 264.000000)">
+                <g id="Blue" transform="translate(811.000000, 262.000000)">
+                    <polyline id="Path-5" fill-opacity="0.100000001" fill="url(#linearGradient-1)" points="0 50.3525024 17.6508092 40.7825824 35.899951 46.5245344 53.9995096 29.4459079 71.6503188 8.2448542 89.8994605 12.9561995 107.400687 27.5319239 125.649828 36.6601553 143.599804 26.9430057 160.951447 23.2622672 179.350172 6.03641111 197.300147 19.4342992 215.549289 40.7825824 233.200098 47.5551412 251.598823 28.1944568 269.100049 0 286.750858 12.9561995 305 15.017413 305 72 1.70056329e-14 72"></polyline>
+                    <polyline id="Path-5" stroke="#2E5BFF" stroke-width="2" points="0 50 17.6508092 40.497076 35.899951 46.1988304 53.9995096 29.2397661 71.6503188 8.1871345 89.8994605 12.8654971 107.400687 27.3391813 125.649828 36.4035088 143.599804 26.754386 160.951447 23.0994152 179.350172 5.99415205 197.300147 19.2982456 215.549289 40.497076 233.200098 47.2222222 251.598823 27.997076 269.100049 0 286.750858 12.8654971 305 14.9122807"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
