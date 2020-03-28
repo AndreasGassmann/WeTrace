@@ -1,13 +1,35 @@
 .status--container {
-  ion-card-header {
-    min-height: 20vh;
+  min-height: 25vh;
+  background-color: var(--ion-color-success);
+
+  &.bg-success {
+    background-color: var(--ion-color-success);
+  }
+  &.bg-warning {
+    background-color: var(--ion-color-warning);
+    color: var(--ion-color-warning-contrast);
+  }
+  &.bg-danger {
     background-color: var(--ion-color-danger);
-    ion-card-title,
-    ion-card-subtitle {
-      color: var(--ion-color-light);
+    color: var(--ion-color-danger-contrast);
+  }
+  .status--container__sub {
+    ion-card {
+      margin: 12px 0 48px;
     }
-    ion-card-subtitle {
-      text-transform: initial;
+    ion-card-content {
+      padding: 8px 0;
     }
   }
+}
+.action--container {
+  position: relative;
+  top: -56px;
+  margin-bottom: -16px;
+  .action--container__sub {
+    padding: 0 12px;
+  }
+}
+.divider--line {
+  border: 1px solid var(--ion-color-light);
 }

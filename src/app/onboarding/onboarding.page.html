@@ -40,3 +40,40 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          *ngIf="!isLastPage"
+          fill="clear"
+          color="medium"
+          expand="block"
+          (click)="finish()"
+        >
+          Skip</ion-button
+        >
+      </ion-col>
+      <ion-col>
+        <ion-button
+          *ngIf="!isLastPage"
+          fill="clear"
+          color="primary"
+          expand="block"
+          (click)="slideNext()"
+        >
+          Next</ion-button
+        >
+        <ion-button
+          *ngIf="isLastPage"
+          color="primary"
+          expand="block"
+          (click)="finish()"
+        >
+          Grant Permissions</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
