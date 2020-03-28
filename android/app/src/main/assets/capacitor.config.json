@@ -1,5 +1,5 @@
 {
-  "appId": "ch.papers.contacttracer",
+  "appId": "ch.papersch.papers.contacttracer",
   "appName": "contact-tracer",
   "bundledWebRuntime": false,
   "npmClient": "npm",
