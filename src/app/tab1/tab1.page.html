@@ -1,17 +1,50 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
+      Contract Tracer
+    </ion-title></ion-toolbar
+  >
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Contract Tracer</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!--TODO: show if in close proximity -->
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-icon name="radio-outline" slot="start"></ion-icon>
+        <!--TODO: show if confirmed / suspected -->
+        <h2>
+          <strong>Attention!</strong> You're in close proximity with a confirmed
+          Covid-19 case.
+        </h2>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="status--container">
+    <ion-card-header>
+      <!--TODO: set status -->
+      <ion-card-title>Positive</ion-card-title>
+      <ion-card-subtitle>
+        <ion-text color="light">
+          You've been tested positive for Covid-19 on
+          <strong>4th April 2020</strong>
+        </ion-text></ion-card-subtitle
+      >
+    </ion-card-header>
+  </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-button size="block" color="primary">I show symptoms</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button size="block" color="primary"
+        >I have been tested positive</ion-button
+      >
+    </ion-col>
+  </ion-row>
 </ion-content>
