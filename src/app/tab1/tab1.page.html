@@ -35,8 +35,7 @@
       -->
     </ion-col>
 
-    <!--TODO: show if in close proximity -->
-    <ion-col size="12" class="status--container__sub ion-no-padding">
+    <ion-col *ngIf="numberOfClosePeople > 0" size="12" class="status--container__sub ion-no-padding">
       <ion-card mode="ios">
         <ion-card-content>
           <ion-item lines="none">
