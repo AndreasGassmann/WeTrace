@@ -1,4 +1,4 @@
-package com.contacttracer.app;
+package ch.papers.contacttracer;
 
 import android.os.Bundle;
 

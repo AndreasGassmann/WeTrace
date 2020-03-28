@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">contact-tracer</string>
     <string name="title_activity_main">contact-tracer</string>
-    <string name="package_name">com.contacttracer.app</string>
-    <string name="custom_url_scheme">com.contacttracer.app</string>
+    <string name="package_name">ch.papers.contacttracer</string>
+    <string name="custom_url_scheme">ch.papers.contacttracer</string>
 </resources>
