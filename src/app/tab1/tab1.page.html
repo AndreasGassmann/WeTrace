@@ -18,7 +18,7 @@
   -->
 
   <!--TODO: set class bg-success, bg-warning, bg-danger depening on status -->
-  <ion-row class="status--container bg-danger ion-padding">
+  <ion-row class="status--container ion-padding" [ngClass]="status">
     <ion-col size="12">
       <h3>Positive</h3>
       <p>
@@ -44,7 +44,7 @@
             <h2>
               <strong>Attention!</strong>
               <p>
-                You're in close proximity with a lot of people. Please keep your
+                You're in close proximity with <strong>{{ numberOfClosePeople }}</strong> people. Please keep your
                 distance.
               </p>
             </h2>
@@ -57,14 +57,10 @@
   <ion-card class="action--container" mode="ios">
     <ion-row>
       <ion-col>
-        <ion-button color="primary" size="block" mode="ios"
-          >I test positive</ion-button
-        >
+        <ion-button color="primary" size="block" mode="ios">I test positive</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" size="block" mode="ios"
-          >I show symptoms</ion-button
-        >
+        <ion-button color="primary" size="block" mode="ios">I show symptoms</ion-button>
       </ion-col>
     </ion-row>
     <div class="divider--line"></div>
@@ -77,13 +73,10 @@
             You need to stay at home until you don't show any more symptoms for
             at least 48 hours.
           </p>
-          <ion-button fill="clear" class="ion-no-padding"
-            >More information</ion-button
-          >
+          <ion-button fill="clear" class="ion-no-padding">More information</ion-button>
         </ion-col>
         <ion-col size="4" offset="1">
-          <img src="/assets/img/slide.png"
-        /></ion-col>
+          <img src="/assets/img/slide.png" /></ion-col>
       </ion-row>
     </div>
   </ion-card>
@@ -91,25 +84,17 @@
   <div class="ion-padding-horizontal">
     <h6>Close contact in the last day</h6>
     <ion-row>
-      <ion-col size="12" class="ion-no-padding"
-        ><h1 class="ion-no-margin">25</h1></ion-col
-      >
-      <ion-col size="12"
-        ><img
-          src="/assets/img/chart-placeholder.svg"
-          style="width:100%;height:auto"
-      /></ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <h1 class="ion-no-margin">25</h1>
+      </ion-col>
+      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
     </ion-row>
     <h6>Close contact in the last 14 days</h6>
     <ion-row>
-      <ion-col size="12" class="ion-no-padding"
-        ><h1 class="ion-no-margin">491</h1></ion-col
-      >
-      <ion-col size="12"
-        ><img
-          src="/assets/img/chart-placeholder.svg"
-          style="width:100%;height:auto"
-      /></ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <h1 class="ion-no-margin">491</h1>
+      </ion-col>
+      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
     </ion-row>
   </div>
 </ion-content>
