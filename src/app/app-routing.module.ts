@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { OnboardingGuard } from './guards/onboarding.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [OnboardingGuard]
   },
   {
     path: 'onboarding',
-    loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+    loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule)
   }
 ];
 @NgModule({
@@ -17,4 +19,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
