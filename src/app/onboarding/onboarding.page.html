@@ -40,3 +40,20 @@
     </ion-slide>
   </ion-slides>
 </ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col>
+        <ion-button *ngIf="!isLastPage" fill="clear" color="light" expand="block" (click)="finish()">
+          Skip</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button *ngIf="!isLastPage" shape="round" color="secondary" expand="block" (click)="slideNext()">
+          Next</ion-button>
+        <ion-button *ngIf="isLastPage" shape="round" color="secondary" expand="block" (click)="finish()">
+          Let's go!</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
