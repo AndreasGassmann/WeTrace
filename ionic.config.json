@@ -1,0 +1,7 @@
+{
+  "name": "contact-tracer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
