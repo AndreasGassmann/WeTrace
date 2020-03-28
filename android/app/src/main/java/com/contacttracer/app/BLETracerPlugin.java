@@ -21,12 +21,17 @@ public class BLETracerPlugin extends Plugin {
 
     @PluginMethod()
     public void getCloseContacts(PluginCall call) {
-        int sinceTimestamp = call.getInt("sinceTimestamp");
+        long sinceTimestamp = 0;
+        try {
+            sinceTimestamp = call.getData().getLong("sinceTimestamp");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        List<DeviceContact> closeContacts = AppDatabase.Companion.getDatabase(this.bridge.getContext()).deviceContactDao().getDeviceContactsSince(new Long(sinceTimestamp));
+        List<DeviceContact> closeContacts = AppDatabase.Companion.getDatabase(this.bridge.getContext()).deviceContactDao().getDeviceContactsSince(sinceTimestamp);
         JSArray jsArray = new JSArray();
         JSObject jsObject = new JSObject();
-        final JSONArray jsonArray = new JSONArray();
+
         for (DeviceContact deviceContact : closeContacts) {
             final JSObject deviceContractJSObject = new JSObject();
             deviceContractJSObject.put("deviceId", deviceContact.getDeviceId());
