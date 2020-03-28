@@ -35,7 +35,7 @@ public class BLETracerPlugin extends Plugin {
             jsArray.put(deviceContractJSObject);
         }
 
-        jsObject.put("result", jsonArray);
+        jsObject.put("result", jsArray);
         call.success(jsObject);
     }
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "51541067375",
+    "firebase_url": "https://contacttracer-9443c.firebaseio.com",
+    "project_id": "contacttracer-9443c",
+    "storage_bucket": "contacttracer-9443c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51541067375:android:b6513951025a5321d32f9a",
+        "android_client_info": {
+          "package_name": "ch.papersch.papers.contacttracer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51541067375-bpg22hau82qcpo0umglkqpf15i05k13e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqarj0BSZ-2ZNHnSAPGq9o--b3sjChfFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51541067375-bpg22hau82qcpo0umglkqpf15i05k13e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "51541067375-2pni4bcp5d93ioqpsp4e23tgbt6lr9ij.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ch.papersch.papers.contacttracer",
+                "app_store_id": "1505062111"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

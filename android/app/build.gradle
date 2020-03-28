@@ -6,8 +6,9 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "ch.papers.contacttracer"
         minSdkVersion 24
+        applicationId "ch.papersch.papers.contacttracer"
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
