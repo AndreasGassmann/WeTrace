@@ -14,6 +14,8 @@
 		6D99E738242F643B00FBFCB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D99E737242F643B00FBFCB9 /* Assets.xcassets */; };
 		6D99E73B242F643B00FBFCB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D99E739242F643B00FBFCB9 /* LaunchScreen.storyboard */; };
 		6D99E73E242F643B00FBFCB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D99E73D242F643B00FBFCB9 /* main.m */; };
+		6D9D4151242FD75F00B38AC7 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9D4150242FD75F00B38AC7 /* Contact.m */; };
+		6DBD0B16242FCBF700F1EA28 /* ContactsLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBD0B15242FCBF700F1EA28 /* ContactsLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,10 @@
 		6D99E73A242F643B00FBFCB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D99E73C242F643B00FBFCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D99E73D242F643B00FBFCB9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D9D414F242FD75F00B38AC7 /* Contact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		6D9D4150242FD75F00B38AC7 /* Contact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		6DBD0B14242FCBF700F1EA28 /* ContactsLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsLogger.h; sourceTree = "<group>"; };
+		6DBD0B15242FCBF700F1EA28 /* ContactsLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,10 @@
 				6D99E72F242F643A00FBFCB9 /* SceneDelegate.m */,
 				6D99E731242F643A00FBFCB9 /* ViewController.h */,
 				6D99E732242F643A00FBFCB9 /* ViewController.m */,
+				6DBD0B14242FCBF700F1EA28 /* ContactsLogger.h */,
+				6DBD0B15242FCBF700F1EA28 /* ContactsLogger.m */,
+				6D9D414F242FD75F00B38AC7 /* Contact.h */,
+				6D9D4150242FD75F00B38AC7 /* Contact.m */,
 				6D99E734242F643A00FBFCB9 /* Main.storyboard */,
 				6D99E737242F643B00FBFCB9 /* Assets.xcassets */,
 				6D99E739242F643B00FBFCB9 /* LaunchScreen.storyboard */,
@@ -146,9 +156,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DBD0B16242FCBF700F1EA28 /* ContactsLogger.m in Sources */,
 				6D99E733242F643A00FBFCB9 /* ViewController.m in Sources */,
 				6D99E72D242F643A00FBFCB9 /* AppDelegate.m in Sources */,
 				6D99E73E242F643B00FBFCB9 /* main.m in Sources */,
+				6D9D4151242FD75F00B38AC7 /* Contact.m in Sources */,
 				6D99E730242F643A00FBFCB9 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
