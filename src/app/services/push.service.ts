@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Plugins, PushNotification } from '@capacitor/core';
 const { PushNotifications } = Plugins;
 
@@ -9,7 +9,7 @@ const fcm = new FCM();
 @Injectable({
   providedIn: 'root'
 })
-export class PushService implements OnInit {
+export class PushService {
   public listeners: ((infectedPeople: string[]) => void)[] = [];
 
   constructor() {
@@ -36,7 +36,7 @@ export class PushService implements OnInit {
     }, 2000);
   }
 
-  ngOnInit() {
+  register() {
     PushNotifications.addListener('registration', data => {
       // alert(JSON.stringify(data));
       console.log('registration', data);
