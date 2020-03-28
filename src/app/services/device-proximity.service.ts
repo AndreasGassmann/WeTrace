@@ -41,7 +41,7 @@ export class DeviceProximityService {
       let result;
       if (Capacitor.isPluginAvailable('BLETracerPlugin')) {
         result = BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 });
-        console.log('result', result);
+        console.log('result', result.result);
       } else {
         result = BLETracerPluginMock.getCloseContacts();
         console.log('mock result', result);
