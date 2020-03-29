@@ -22,7 +22,9 @@ class BackgroundBLEBroadcastReceiver : BroadcastReceiver() {
 
         bluetoothManager.adapter.enable() // TODO maybe needs user interaction
 
-        bluetoothManager.adapter.bluetoothLeScanner.startScan(object : ScanCallback() {
+        val scanFilter = ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString("${Utils.SERVICE_UUID_PREFIX}0000-0000-0000-0000-000000000000"),ParcelUuid.fromString("FFFF0000-0000-0000-0000-000000000000")).build()
+        val scanSettings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_POWER).build()
+        bluetoothManager.adapter.bluetoothLeScanner.startScan(listOf(scanFilter), scanSettings, object : ScanCallback() {
             override fun onScanFailed(errorCode: Int) {
                 super.onScanFailed(errorCode)
                 Log.d("SCAN", "errorCode: ${errorCode}")
