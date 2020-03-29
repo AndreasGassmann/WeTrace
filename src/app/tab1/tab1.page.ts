@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { DeviceProximityService } from '../services/device-proximity.service';
 import { PushService } from '../services/push.service';
 import { AlertController } from '@ionic/angular';
@@ -20,17 +20,20 @@ export class Tab1Page {
   statusAction: Array<{ text: string; action: () => void }>;
   recommendationTitle = 'test';
   recommendationDescription = 'test';
+  recommendationImage = 'test';
   numberOfClosePeople = 0;
 
   constructor(
     private readonly deviceProximityService: DeviceProximityService,
     private readonly pushService: PushService,
     private readonly alertController: AlertController,
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly cdr: ChangeDetectorRef
   ) {
     this.deviceProximityService.listeners.push(proximities => {
-      console.log('proximities', proximities);
+      console.log('Proximities length', proximities.length);
       this.numberOfClosePeople = proximities.length;
+      this.cdr.detectChanges();
     });
 
     this.setStatus(Status.INFECTED);
@@ -50,8 +53,14 @@ export class Tab1Page {
         this.recommendationTitle = 'Practice Social Distancing';
         this.recommendationDescription =
           'To be safe you should practice social distancing and stay away at least 2m from others.';
+        this.recommendationImage = '/assets/img/we_trace_distance.svg';
         this.statusAction = [
-          { text: 'I tested positive', action: () => { this.showITestedPositiveAlert(); } }
+          {
+            text: 'I tested positive',
+            action: () => {
+              this.showITestedPositiveAlert();
+            }
+          }
         ];
 
         break;
@@ -62,10 +71,21 @@ export class Tab1Page {
         this.statusDescription = `You have had a close contact with a confirmed Covid-19 case.`;
         this.recommendationTitle = 'Quarantine';
         this.recommendationDescription =
-          'Please monitor your symptoms and self-isolate for <strong>x more days</strong>. After this period, you will be considered healthy again.';
+          'Please monitor your symptoms and self-isolate for 14 more days. After this period, you will be considered healthy again.';
+        this.recommendationImage = '/assets/img/we_trace_quarantaine.svg';
         this.statusAction = [
-          { text: 'I tested positive', action: () => { this.showITestedPositiveAlert(); } },
-          { text: 'I tested negative', action: () => { this.showITestedNegativeAlert(); } }
+          {
+            text: 'I tested positive',
+            action: () => {
+              this.showITestedPositiveAlert();
+            }
+          },
+          {
+            text: 'I tested negative',
+            action: () => {
+              this.showITestedNegativeAlert();
+            }
+          }
         ];
         // Add countdown
 
@@ -78,10 +98,13 @@ export class Tab1Page {
         this.recommendationTitle = 'Quarantine';
         this.recommendationDescription =
           'We wish you a speedy recovery. Please monitor your symptoms and stay in quarantaine as longs as you\'ve been advised by your doctor.';
+        this.recommendationImage = '/assets/img/we_trace_quarantaine.svg';
         this.statusAction = [
           {
             text: 'I had no symptoms for 48 hours',
-            action: () => { this.showIFeelGoodAgainAlert(); }
+            action: () => {
+              this.showIFeelGoodAgainAlert();
+            }
           }
         ];
 
