@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plugins, Capacitor } from '@capacitor/core';
+import { Plugins, PushNotification } from '@capacitor/core';
 const { PushNotifications } = Plugins;
 
 // with type support
@@ -14,9 +14,8 @@ const { Device } = Plugins;
 export class PushService {
   public listeners: ((infectedPeople: string[]) => void)[] = [];
 
-  constructor(
-    private http: HttpClient) {
-      this.register();
+  constructor(private http: HttpClient) {
+    // this.register();
   }
 
   async register() {
@@ -40,7 +39,7 @@ export class PushService {
           active: true,
           type: info.platform,
           registration_id: response.token
-        });
+        }).subscribe(res => console.log(res));
       }
       )
       .catch(err => console.log(err));
@@ -52,17 +51,16 @@ export class PushService {
 
 
 
-    // PushNotifications.addListener('registration', data => {
-    //   // alert(JSON.stringify(data));
-    //   console.log('registration', data);
-    // });
-    // PushNotifications.register().then(() => alert(`registered for push`));
-    // PushNotifications.addListener(
-    //   'pushNotificationReceived',
-    //   (notification: PushNotification) => {
-    //     console.log('notification ' + JSON.stringify(notification));
-    //   }
-    // );
+    PushNotifications.addListener('registration', data => {
+      // alert(JSON.stringify(data));
+      console.log('registration', data);
+    });
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotification) => {
+        console.log('notification ' + JSON.stringify(notification));
+      }
+    );
   }
 
   infectedPeopleNotification(infectedPeople: string[]) {
