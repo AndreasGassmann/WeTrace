@@ -17,7 +17,7 @@ class Utils {
         const val TIME_INTERVAL = 10 * 60 * 1000
         const val SERVICE_UUID_PREFIX = "B6F4"
         const val OWN_DEVICE_UUID_KEY = "OWN_DEVICE_UUID"
-        const val ADVERTISEMENT_TIME = 30000
+        const val ADVERTISEMENT_TIME = 179000
 
         fun nextTriggerTimestamp(): Long {
             val nowMillis = System.currentTimeMillis()
@@ -39,7 +39,7 @@ class Utils {
 
         fun registerForBLEScanCallback(context: Context) {
             val scanFilter = ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString("${Utils.SERVICE_UUID_PREFIX}0000-0000-0000-0000-000000000000"), ParcelUuid.fromString("FFFF0000-0000-0000-0000-000000000000")).build()
-            val scanSettings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_POWER).setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE).setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT).build()
+            val scanSettings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE).setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT).build()
             val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
             val intent = Intent(context, BLEScanResultBroadcastReceiver::class.java)
             intent.putExtra("o-scan", true)

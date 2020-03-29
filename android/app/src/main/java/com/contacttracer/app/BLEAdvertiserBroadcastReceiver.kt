@@ -22,9 +22,9 @@ class BLEAdvertiserBroadcastReceiver : BroadcastReceiver() {
         bluetoothManager.adapter.enable() // TODO maybe needs user interaction
 
         val advertiseSettings =
-            AdvertiseSettings.Builder().setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
+            AdvertiseSettings.Builder().setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
                 .setConnectable(false).setTxPowerLevel(
-                    AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW
+                    AdvertiseSettings.ADVERTISE_TX_POWER_HIGH
                 ).setTimeout(Utils.ADVERTISEMENT_TIME).build()
 
         val advertiseData =
