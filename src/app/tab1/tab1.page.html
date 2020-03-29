@@ -1,40 +1,17 @@
-<!-- hidden for now
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>
-      Contract Tracer
-    </ion-title></ion-toolbar
-  >
-</ion-header>
--->
-
 <ion-content>
-  <!-- hidden for now
-  <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar>
-      <ion-title size="large">Contract Tracer</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  -->
-
-  <!--TODO: set class bg-success, bg-warning, bg-danger depening on status -->
   <ion-row class="status--container ion-padding" [ngClass]="statusClass">
     <ion-col size="12">
       <h3>{{ statusTitle }}</h3>
       <p>
         {{statusDescription}}
       </p>
-      <!--
-      <p>
-        Oh, you're not feeling well. If you have the chance get tested.
-      </p>
-      <p>
-        Great! You're currently Covid-19 free :)
-      </p>
-      -->
     </ion-col>
 
-    <ion-col *ngIf="numberOfClosePeople > 0" size="12" class="status--container__sub ion-no-padding">
+    <ion-col
+      *ngIf="numberOfClosePeople > 0"
+      size="12"
+      class="status--container__sub ion-no-padding"
+    >
       <ion-card mode="ios">
         <ion-card-content>
           <ion-item lines="none">
@@ -42,7 +19,13 @@
             <h2>
               <p>
                 You're in close proximity with
-                <strong>{{ numberOfClosePeople }}</strong> people.
+                <strong>{{ numberOfClosePeople }}</strong>
+                <ng-container *ngIf="numberOfClosePeople === 1">
+                  person.
+                </ng-container>
+                <ng-container *ngIf="numberOfClosePeople > 1">
+                  people.
+                </ng-container>
               </p>
             </h2>
           </ion-item>
@@ -52,34 +35,47 @@
   </ion-row>
 
   <ion-card class="action--container" mode="ios">
-    <!-- <div class="action--container__sub">
+    <div class="action--container__sub">
       <h6>What should I do?</h6>
-      <ion-row class="ion-align-items-center ion-padding-bottom">
+      <ion-row class="ion-padding-bottom">
+        <ion-col size="12" class="ion-no-padding">
+          <h3>{{recommendationTitle}}</h3>
+        </ion-col>
         <ion-col size="7" class="ion-no-padding">
-          <h3>Quarantine</h3>
           <p>
-            You need to stay at home until you don't show any more symptoms for
-            at least 48 hours.
+            {{recommendationDescription}}
           </p>
-          <ion-button fill="clear" class="ion-no-padding">More information</ion-button>
+          <ion-button fill="clear" class="ion-no-padding"
+            >More information</ion-button
+          >
         </ion-col>
         <ion-col size="4" offset="1">
-          <img src="/assets/img/slide.png" /></ion-col>
+          <img src="/assets/img/slide.png"
+        /></ion-col>
       </ion-row>
-    </div> -->
+    </div>
     <div class="divider--line"></div>
 
     <ion-row>
       <ion-col>
-        <ion-button color="primary" size="block" mode="ios" (click)="showIAmInfectedAlert()">I tested positive
+        <ion-button
+          color="primary"
+          size="block"
+          mode="ios"
+          (click)="showIAmInfectedAlert()"
+          >I tested positive
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" size="block" mode="ios" (click)="showIHaveSymptomsAlert()">I show symptoms
+        <ion-button
+          color="primary"
+          size="block"
+          mode="ios"
+          (click)="showIHaveSymptomsAlert()"
+          >I show symptoms
         </ion-button>
       </ion-col>
     </ion-row>
-
   </ion-card>
 
   <div class="ion-padding-horizontal">
@@ -88,14 +84,22 @@
       <ion-col size="12" class="ion-no-padding">
         <h1 class="ion-no-margin">25</h1>
       </ion-col>
-      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
+      <ion-col size="12"
+        ><img
+          src="/assets/img/chart-placeholder.svg"
+          style="width:100%;height:auto"
+      /></ion-col>
     </ion-row>
     <h6>Close contact in the last 14 days</h6>
     <ion-row>
       <ion-col size="12" class="ion-no-padding">
         <h1 class="ion-no-margin">491</h1>
       </ion-col>
-      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
+      <ion-col size="12"
+        ><img
+          src="/assets/img/chart-placeholder.svg"
+          style="width:100%;height:auto"
+      /></ion-col>
     </ion-row>
   </div>
 </ion-content>
