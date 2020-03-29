@@ -49,32 +49,25 @@
             >More information</ion-button
           >
         </ion-col>
-        <ion-col size="4" offset="1">
-          <img src="/assets/img/slide.png"
+        <ion-col size="5" class="ion-no-padding">
+          <img src="{{recommendationImage}}"
         /></ion-col>
       </ion-row>
     </div>
     <div class="divider--line"></div>
 
     <ion-row>
-      <ion-col>
-        <ion-button
-          color="primary"
-          size="block"
-          mode="ios"
-          (click)="showIAmInfectedAlert()"
-          >I tested positive
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button
-          color="primary"
-          size="block"
-          mode="ios"
-          (click)="showIHaveSymptomsAlert()"
-          >I show symptoms
-        </ion-button>
-      </ion-col>
+      <ng-container *ngFor="let button of statusAction">
+        <ion-col>
+          <ion-button
+            color="primary"
+            size="block"
+            mode="ios"
+            (click)="button.action()"
+            >{{button.text}}
+          </ion-button>
+        </ion-col>
+      </ng-container>
     </ion-row>
   </ion-card>
 

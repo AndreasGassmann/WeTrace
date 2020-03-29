@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Plugins, Capacitor } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 const { BLETracerPlugin } = Plugins;
 
 class BLETracerPluginMock {
@@ -35,20 +36,21 @@ interface BluetoothProximityUpdate {
 export class DeviceProximityService {
   public listeners: ((proximities: BluetoothProximityUpdate[]) => void)[] = [];
 
-  constructor(public readonly storageService: StorageService) {
+  constructor(public readonly storageService: StorageService, private readonly platform: Platform) {
 
-    setInterval(() => {
+    setInterval(async () => {
       let result;
       if (Capacitor.isPluginAvailable('BLETracerPlugin')) {
-        result = BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 });
-        console.log('result', result.result);
+        const contacts = await BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 });
+        result = contacts.result;
+        console.log('BLETracerPlugin result', result);
       } else {
         result = BLETracerPluginMock.getCloseContacts();
-        console.log('mock result', result);
+        console.log('BLETracerPlugin MOCK result', result);
       }
 
       this.proximityUpdate(result);
-    }, 2000);
+    }, 1000);
   }
 
   proximityUpdate(proximities: BluetoothProximityUpdate[]) {

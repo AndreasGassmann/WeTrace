@@ -14,14 +14,15 @@ import java.util.*
 class Utils {
 
     companion object {
-        const val TIME_INTERVAL = 9 * 60 * 1000
+        const val TIME_INTERVAL = 10 * 60 * 1000
         const val SERVICE_UUID_PREFIX = "B6F4"
         const val OWN_DEVICE_UUID_KEY = "OWN_DEVICE_UUID"
         const val ADVERTISEMENT_TIME = 30000
 
         fun nextTriggerTimestamp(): Long {
-            val restMillis = System.currentTimeMillis() % TIME_INTERVAL
-            return (System.currentTimeMillis() - restMillis) + TIME_INTERVAL
+            val nowMillis = System.currentTimeMillis()
+            val restMillis = nowMillis % TIME_INTERVAL
+            return (nowMillis - restMillis) + TIME_INTERVAL
         }
 
         fun getOwnDeviceUUID(context: Context): String {
