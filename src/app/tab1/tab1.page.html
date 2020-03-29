@@ -57,24 +57,17 @@
     <div class="divider--line"></div>
 
     <ion-row>
-      <ion-col>
-        <ion-button
-          color="primary"
-          size="block"
-          mode="ios"
-          (click)="showIAmInfectedAlert()"
-          >I tested positive
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button
-          color="primary"
-          size="block"
-          mode="ios"
-          (click)="showIHaveSymptomsAlert()"
-          >I show symptoms
-        </ion-button>
-      </ion-col>
+      <ng-container *ngFor="let button of statusAction">
+        <ion-col>
+          <ion-button
+            color="primary"
+            size="block"
+            mode="ios"
+            (click)="button.action"
+            >{{button.text}}
+          </ion-button>
+        </ion-col>
+      </ng-container>
     </ion-row>
   </ion-card>
 

@@ -20,6 +20,7 @@ export class Tab1Page {
   statusClass = "bg-success";
   statusTitle = "Negative";
   statusDescription = "test";
+  statusAction: Array<{ text: string; action: string }>;
   recommendationTitle = "test";
   recommendationDescription = "test";
   numberOfClosePeople = 0;
@@ -57,6 +58,10 @@ export class Tab1Page {
         this.recommendationTitle = "Practice Social Distancing";
         this.recommendationDescription =
           "To be safe you should practice social distancing and stay away at least 2m from others.";
+        this.statusAction = [
+          { text: "I tested positive", action: "showIAmInfectedAlert()" },
+          { text: "I have symptoms", action: "showIHaveSymptomsAlert()" }
+        ];
         // Button 1 = I tested positive
 
         break;
@@ -68,9 +73,11 @@ export class Tab1Page {
         this.recommendationTitle = "Quarantine";
         this.recommendationDescription =
           "Please monitor your symptoms and self-isolate for <strong>x more days</strong>. After this period, you will be considered healthy again.";
+        this.statusAction = [
+          { text: "I tested positive", action: "showIAmInfectedAlert()" },
+          { text: "I tested negative", action: "showIAmInfectedAlert()" }
+        ];
         // Add countdown
-        // Button 1 = I tested positive
-        // Button 2 = I tested negative
 
         break;
 
@@ -81,6 +88,12 @@ export class Tab1Page {
         this.recommendationTitle = "Quarantine";
         this.recommendationDescription =
           "We wish you a speedy recovery. Please monitor your symptoms and stay in quarantaine as longs as you've been advised by your doctor.";
+        this.statusAction = [
+          {
+            text: "I had no symptoms for 48 hours",
+            action: "showIAmInfectedAlert()"
+          }
+        ];
         /// Button 1 = I feel great again (no symptoms for 48 hours)
 
         break;
