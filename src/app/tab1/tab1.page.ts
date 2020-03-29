@@ -3,12 +3,9 @@ import { DeviceProximityService } from '../services/device-proximity.service';
 import { PushService } from '../services/push.service';
 import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-
-enum Status {
-  HEALTHY = 'healthy',
-  POTENTIALLY_INFECTED = 'symptoms',
-  INFECTED = 'infected'
-}
+import { Status } from '../Status';
+import { Plugins, Capacitor } from '@capacitor/core';
+const { BLETracerPlugin } = Plugins;
 
 @Component({
   selector: 'app-tab1',
@@ -41,12 +38,8 @@ export class Tab1Page {
 
     this.setStatus(Status.INFECTED);
 
-    this.pushService.listeners.push(infectedPeople => {
-      Math.random() > 0.5
-        ? this.setStatus(Status.HEALTHY)
-        : Math.random() > 0.5
-          ? this.setStatus(Status.POTENTIALLY_INFECTED)
-          : this.setStatus(Status.INFECTED);
+    this.pushService.listeners.push(status => {
+      this.setStatus(status);
     });
   }
 
@@ -138,16 +131,19 @@ export class Tab1Page {
         },
         {
           text: 'Yes',
-          handler: () => {
+          handler: async () => {
             this.http
               .post(
                 'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
                 {
-                  signature: Math.random().toString(),
+                  signature: (await BLETracerPlugin.getOwnDeviceUUID()).result,
                   severity: 2
                 }
               )
-              .subscribe(res => console.log(res));
+              .subscribe(res => {
+                console.log(res)
+                this.setStatus(Status.INFECTED);
+              });
           }
         }
       ]
