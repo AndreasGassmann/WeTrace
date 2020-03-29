@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Status } from '../Status';
 import { Plugins, Capacitor } from '@capacitor/core';
+import { StorageService, StorageKey } from '../services/storage.service';
 const { BLETracerPlugin } = Plugins;
 
 @Component({
@@ -14,17 +15,18 @@ const { BLETracerPlugin } = Plugins;
 })
 export class Tab1Page {
   status: Status = Status.HEALTHY;
-  statusClass = 'bg-success';
-  statusTitle = 'Negative';
-  statusDescription = 'test';
+  statusClass = 'bg-light';
+  statusTitle = '';
+  statusDescription = '';
   statusAction: Array<{ text: string; action: () => void }>;
-  recommendationTitle = 'test';
-  recommendationDescription = 'test';
-  recommendationImage = 'test';
+  recommendationTitle = '';
+  recommendationDescription = '';
+  recommendationImage = '';
   numberOfClosePeople = 0;
 
   constructor(
     private readonly deviceProximityService: DeviceProximityService,
+    private readonly storageSerice: StorageService,
     private readonly pushService: PushService,
     private readonly alertController: AlertController,
     private readonly http: HttpClient,
@@ -36,7 +38,9 @@ export class Tab1Page {
       this.cdr.detectChanges();
     });
 
-    this.setStatus(Status.HEALTHY);
+    this.storageSerice.get(StorageKey.COVID_STATUS).then(status => {
+      this.setStatus(status);
+    });
 
     this.pushService.listeners.push(status => {
       console.log('current status is /', this.status, status);
@@ -52,6 +56,8 @@ export class Tab1Page {
     switch (status) {
       case Status.HEALTHY:
         this.status = Status.HEALTHY;
+        this.storageSerice.set(StorageKey.COVID_STATUS, Status.HEALTHY);
+
         this.statusClass = 'bg-success';
         this.statusTitle = `You're healthy! 😊`;
         this.statusDescription =
@@ -73,6 +79,8 @@ export class Tab1Page {
 
       case Status.POTENTIALLY_INFECTED:
         this.status = Status.POTENTIALLY_INFECTED;
+        this.storageSerice.set(StorageKey.COVID_STATUS, Status.POTENTIALLY_INFECTED);
+
         this.statusClass = 'bg-warning';
         this.statusTitle = `You're potentially infected with Covid-19 😷`;
         this.statusDescription = `You have had a close contact with a confirmed Covid-19 case.`;
@@ -100,6 +108,8 @@ export class Tab1Page {
 
       case Status.INFECTED:
         this.status = Status.INFECTED;
+        this.storageSerice.set(StorageKey.COVID_STATUS, Status.INFECTED);
+
         this.statusClass = 'bg-danger';
         this.statusTitle = `You are a confirmed Covid-19 case 🤒`;
         this.statusDescription = `You have been tested positive for Covid-19 by a doctor.`;
@@ -145,7 +155,7 @@ export class Tab1Page {
               .post(
                 'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
                 {
-                  signature: (await BLETracerPlugin.getOwnDeviceUUID()).result.substring(0, 20),
+                  signature: (await BLETracerPlugin.getOwnDeviceUUID()).result,
                   severity: 2
                 }
               )

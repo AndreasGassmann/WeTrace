@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs';
+import { Status } from '../Status';
 
 export enum StorageKey {
   HAS_SHOWN_ONBOARDING = 'HAS_SHOWN_ONBOARDING',
@@ -9,14 +10,14 @@ export enum StorageKey {
 
 interface StorageKeyReturnType {
   [StorageKey.HAS_SHOWN_ONBOARDING]: boolean;
-  [StorageKey.COVID_STATUS]: number;
+  [StorageKey.COVID_STATUS]: Status;
 }
 
 type StorageKeyReturnDefaults = { [key in StorageKey]: StorageKeyReturnType[key] };
 
 const defaultValues: StorageKeyReturnDefaults = {
   [StorageKey.HAS_SHOWN_ONBOARDING]: false,
-  [StorageKey.COVID_STATUS]: 0
+  [StorageKey.COVID_STATUS]: Status.HEALTHY
 };
 
 @Injectable({
