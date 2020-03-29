@@ -36,7 +36,7 @@ export class Tab1Page {
       this.cdr.detectChanges();
     });
 
-    this.setStatus(Status.INFECTED);
+    this.setStatus(Status.HEALTHY);
 
     this.pushService.listeners.push(status => {
       this.setStatus(status);
@@ -132,6 +132,7 @@ export class Tab1Page {
         {
           text: 'Yes',
           handler: async () => {
+            this.setStatus(Status.INFECTED);
             this.http
               .post(
                 'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
@@ -141,8 +142,7 @@ export class Tab1Page {
                 }
               )
               .subscribe(res => {
-                console.log(res)
-                this.setStatus(Status.INFECTED);
+                console.log(res);
               });
           }
         }
@@ -169,6 +169,7 @@ export class Tab1Page {
         {
           text: 'Yes',
           handler: () => {
+            this.setStatus(Status.HEALTHY);
             this.http
               .post(
                 'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
@@ -204,6 +205,7 @@ export class Tab1Page {
           text: 'Yes',
           handler: () => {
             console.log('Confirm Okay');
+            this.setStatus(Status.HEALTHY);
           }
         }
       ]
