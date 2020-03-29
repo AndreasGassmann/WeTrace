@@ -10,6 +10,11 @@ import { Platform } from '@ionic/angular';
 const fcm = new FCM();
 const { Device } = Plugins;
 
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+const TIME_TO_CHECK = 14 * DAY;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,10 +52,6 @@ export class PushService {
         )
         .catch(err => console.log(err));
 
-      // setInterval(() => {
-      //   this.infectedPeopleNotification([Math.random().toString()]);
-      // }, 2000);
-
       PushNotifications.addListener('registration', data => {
         // alert(JSON.stringify(data));
         console.log('registration', data);
@@ -59,13 +60,12 @@ export class PushService {
         'pushNotificationReceived',
         (notification: PushNotification) => {
           console.log('notification ' + JSON.stringify(notification));
-          // this.infectedPeopleNotification([Math.random().toString()]);
-          this.changeStatus(Status.POTENTIALLY_INFECTED);
-          // BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 }).then(list => {
-          //   if (list.map(i => i.deviceId).indexOf(notification.data.signature) > -1) {
-          //     this.changeStatus(Status.POTENTIALLY_INFECTED);
-          //   }
-          // });
+          BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
+            console.log('CHECKING', notification.data.signature, response.result);
+            if (response.result.map(i => i.deviceId).indexOf(notification.data.signature) > -1) {
+              this.changeStatus(Status.POTENTIALLY_INFECTED);
+            }
+          });
         }
       );
     }
