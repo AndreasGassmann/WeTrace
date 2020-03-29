@@ -60,11 +60,12 @@ export class PushService {
         (notification: PushNotification) => {
           console.log('notification ' + JSON.stringify(notification));
           // this.infectedPeopleNotification([Math.random().toString()]);
-          BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 }).then(list => {
-            if (list.map(i => i.deviceId).indexOf(notification.data.signature) > -1) {
-              this.changeStatus(Status.POTENTIALLY_INFECTED);
-            }
-          });
+          this.changeStatus(Status.POTENTIALLY_INFECTED);
+          // BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 }).then(list => {
+          //   if (list.map(i => i.deviceId).indexOf(notification.data.signature) > -1) {
+          //     this.changeStatus(Status.POTENTIALLY_INFECTED);
+          //   }
+          // });
         }
       );
     }

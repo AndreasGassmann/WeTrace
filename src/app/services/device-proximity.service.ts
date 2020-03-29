@@ -41,7 +41,7 @@ export class DeviceProximityService {
     setInterval(async () => {
       let result;
       if (Capacitor.isPluginAvailable('BLETracerPlugin')) {
-        const contacts = await BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 1000 });
+        const contacts = await BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 1000 });
         result = contacts.result;
         console.log('BLETracerPlugin result', result);
       } else {

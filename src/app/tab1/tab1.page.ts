@@ -39,6 +39,9 @@ export class Tab1Page {
     this.setStatus(Status.HEALTHY);
 
     this.pushService.listeners.push(status => {
+      if (this.status === Status.INFECTED) {
+        return;
+      }
       this.setStatus(status);
     });
   }
@@ -137,7 +140,7 @@ export class Tab1Page {
               .post(
                 'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
                 {
-                  signature: (await BLETracerPlugin.getOwnDeviceUUID()).result,
+                  signature: (await BLETracerPlugin.getOwnDeviceUUID()).result.substring(0, 20),
                   severity: 2
                 }
               )
@@ -170,15 +173,6 @@ export class Tab1Page {
           text: 'Yes',
           handler: () => {
             this.setStatus(Status.HEALTHY);
-            this.http
-              .post(
-                'https://contacttracer.dev.gke.papers.tech/api/v1/reports/',
-                {
-                  signature: Math.random().toString(),
-                  severity: 2
-                }
-              )
-              .subscribe(res => console.log(res));
           }
         }
       ]
