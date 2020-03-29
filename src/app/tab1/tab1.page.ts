@@ -39,16 +39,19 @@ export class Tab1Page {
     this.setStatus(Status.HEALTHY);
 
     this.pushService.listeners.push(status => {
+      console.log('current status is /', this.status, status);
       if (this.status === Status.INFECTED) {
         return;
+      } else {
+        this.setStatus(status);
       }
-      this.setStatus(status);
     });
   }
 
   public async setStatus(status: Status) {
     switch (status) {
       case Status.HEALTHY:
+        this.status = Status.HEALTHY;
         this.statusClass = 'bg-success';
         this.statusTitle = `You're healthy! 😊`;
         this.statusDescription =
@@ -69,6 +72,7 @@ export class Tab1Page {
         break;
 
       case Status.POTENTIALLY_INFECTED:
+        this.status = Status.POTENTIALLY_INFECTED;
         this.statusClass = 'bg-warning';
         this.statusTitle = `You're potentially infected with Covid-19 😷`;
         this.statusDescription = `You have had a close contact with a confirmed Covid-19 case.`;
@@ -95,6 +99,7 @@ export class Tab1Page {
         break;
 
       case Status.INFECTED:
+        this.status = Status.INFECTED;
         this.statusClass = 'bg-danger';
         this.statusTitle = `You are a confirmed Covid-19 case 🤒`;
         this.statusDescription = `You have been tested positive for Covid-19 by a doctor.`;
