@@ -5,11 +5,10 @@ import android.os.Bundle;
 
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
-import com.getcapacitor.util.HostMask;
 
 import java.util.ArrayList;
 
-import ch.papers.contacttracer.BackgroundBLEBroadcastReceiver;
+import ch.papers.contacttracer.BLEAdvertiserBroadcastReceiver;
 import io.stewan.capacitor.fcm.FCMPlugin;
 
 
@@ -27,5 +26,6 @@ public class MainActivity extends BridgeActivity {
         }});
 
         Utils.Companion.registerForBLEScanCallback(this);
+        sendBroadcast(new Intent(this, BLEAdvertiserBroadcastReceiver.class));
     }
 }

@@ -13,49 +13,13 @@ import ch.papers.contacttracer.models.DeviceContact
 import com.contacttracer.app.Utils
 
 
-class BackgroundBLEBroadcastReceiver : BroadcastReceiver() {
+class BLEAdvertiserBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
-        Log.d("ALARM", "onreceive")
+        Log.d("ALARM", "onreceive BLEAdvertiserBroadcastReceiver")
         val bluetoothManager =
             context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        val deviceContactDao = AppDatabase.getDatabase(context)?.deviceContactDao()
 
         bluetoothManager.adapter.enable() // TODO maybe needs user interaction
-
-        val scanFilter = ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString("${Utils.SERVICE_UUID_PREFIX}0000-0000-0000-0000-000000000000"),ParcelUuid.fromString("FFFF0000-0000-0000-0000-000000000000")).build()
-        val scanSettings = ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_POWER).build()
-        bluetoothManager.adapter.bluetoothLeScanner.startScan(listOf(scanFilter), scanSettings, object : ScanCallback() {
-            override fun onScanFailed(errorCode: Int) {
-                super.onScanFailed(errorCode)
-                Log.d("SCAN", "errorCode: ${errorCode}")
-            }
-
-            override fun onScanResult(callbackType: Int, result: ScanResult?) {
-                super.onScanResult(callbackType, result)
-
-                Log.d("SCAN", "result: ${result}")
-                Thread {
-                    val deviceId = result?.scanRecord?.serviceUuids?.first()?.uuid?.toString()
-                    if (deviceId != null && deviceId.toUpperCase()
-                            .startsWith(Utils.SERVICE_UUID_PREFIX)
-                    ) {
-                        var deviceContact = deviceContactDao?.getDeviceContactById(deviceId)
-
-                        if (deviceContact == null) {
-                            deviceContact = DeviceContact(
-                                deviceId,
-                                System.currentTimeMillis(),
-                                System.currentTimeMillis()
-                            )
-                        } else {
-                            deviceContact.lastEncountered = System.currentTimeMillis()
-                        }
-                        Log.d("INSERT", "inserting")
-                        deviceContactDao?.insertDeviceContact(deviceContact)
-                    }
-                }.start()
-            }
-        })
 
         val advertiseSettings =
             AdvertiseSettings.Builder().setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
@@ -87,13 +51,13 @@ class BackgroundBLEBroadcastReceiver : BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val alarmIntent =
-            Intent(context, BackgroundBLEBroadcastReceiver::class.java).let { intent ->
+            Intent(context, BLEAdvertiserBroadcastReceiver::class.java).let { intent ->
                 PendingIntent.getBroadcast(context, 0, intent, 0)
             }
         alarmManager.cancel(alarmIntent)
 
         Log.d("ALARM", "setting alarm for ${Utils.nextTriggerTimestamp()}")
-        alarmManager.setExactAndAllowWhileIdle(
+        alarmManager.set(
             AlarmManager.RTC_WAKEUP,
             Utils.nextTriggerTimestamp(),
             alarmIntent

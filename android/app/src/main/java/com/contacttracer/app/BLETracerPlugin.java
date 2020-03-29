@@ -44,4 +44,11 @@ public class BLETracerPlugin extends Plugin {
         call.success(jsObject);
     }
 
+    @PluginMethod()
+    public void getOwnDeviceUUID(PluginCall call) {
+        JSObject jsObject = new JSObject();
+        jsObject.put("result", Utils.Companion.getOwnDeviceUUID(this.bridge.getContext()));
+        call.success();
+    }
+
 }
