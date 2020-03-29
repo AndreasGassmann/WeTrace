@@ -25,8 +25,8 @@ export class PushService {
         // Subscribe to a specific topic
         // you can use `FCMPlugin` or just `fcm`
         fcm
-          .subscribeTo({ topic: 'test' })
-          .then(r => alert(`subscribed to topic`))
+          .subscribeTo({ topic: 'new_infections' })
+          .then(r => console.log(`subscribed to topic "new_infections"`, r))
           .catch(err => console.log(err));
       })
       .catch(err => alert(JSON.stringify(err)));
@@ -47,9 +47,6 @@ export class PushService {
     setInterval(() => {
       this.infectedPeopleNotification([Math.random().toString()]);
     }, 2000);
-
-
-
 
     PushNotifications.addListener('registration', data => {
       // alert(JSON.stringify(data));
