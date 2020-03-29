@@ -18,12 +18,11 @@
   -->
 
   <!--TODO: set class bg-success, bg-warning, bg-danger depening on status -->
-  <ion-row class="status--container ion-padding" [ngClass]="status">
+  <ion-row class="status--container ion-padding" [ngClass]="statusClass">
     <ion-col size="12">
-      <h3>Positive</h3>
+      <h3>{{ statusTitle }}</h3>
       <p>
-        You've been tested positive for Covid-19 on
-        <strong>4th April 2020</strong>
+        {{statusDescription}}
       </p>
       <!--
       <p>
@@ -41,11 +40,9 @@
           <ion-item lines="none">
             <ion-icon name="radio-outline" slot="start"></ion-icon>
             <h2>
-              <strong>Attention!</strong>
               <p>
                 You're in close proximity with
-                <strong>{{ numberOfClosePeople }}</strong> people. Please
-                practice social distancing.
+                <strong>{{ numberOfClosePeople }}</strong> people.
               </p>
             </h2>
           </ion-item>
@@ -55,17 +52,7 @@
   </ion-row>
 
   <ion-card class="action--container" mode="ios">
-    <ion-row>
-      <ion-col>
-        <ion-button color="primary" size="block" mode="ios" (click)="showInfectedAlert()">I test positive</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button color="primary" size="block" mode="ios" (click)="showIHaveSymptomsAlert()">I show symptoms
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <div class="divider--line"></div>
-    <div class="action--container__sub">
+    <!-- <div class="action--container__sub">
       <h6>What should I do?</h6>
       <ion-row class="ion-align-items-center ion-padding-bottom">
         <ion-col size="7" class="ion-no-padding">
@@ -79,7 +66,20 @@
         <ion-col size="4" offset="1">
           <img src="/assets/img/slide.png" /></ion-col>
       </ion-row>
-    </div>
+    </div> -->
+    <div class="divider--line"></div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" size="block" mode="ios" (click)="showIAmInfectedAlert()">I tested positive
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" size="block" mode="ios" (click)="showIHaveSymptomsAlert()">I show symptoms
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
   </ion-card>
 
   <div class="ion-padding-horizontal">
