@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Plugins, PushNotification } from '@capacitor/core';
-const { PushNotifications } = Plugins;
+import { Plugins, PushNotification, Capacitor } from '@capacitor/core';
+const { PushNotifications, BLETracerPlugin } = Plugins;
 
 // with type support
 import { FCM } from 'capacitor-fcm';
 import { HttpClient } from '@angular/common/http';
+import { Status } from '../Status';
 const fcm = new FCM();
 const { Device } = Plugins;
 
@@ -12,7 +13,7 @@ const { Device } = Plugins;
   providedIn: 'root'
 })
 export class PushService {
-  public listeners: ((infectedPeople: string[]) => void)[] = [];
+  public listeners: ((status : Status) => void)[] = [];
 
   constructor(private http: HttpClient) {
     // this.register();
@@ -44,9 +45,9 @@ export class PushService {
       )
       .catch(err => console.log(err));
 
-    setInterval(() => {
-      this.infectedPeopleNotification([Math.random().toString()]);
-    }, 2000);
+    // setInterval(() => {
+    //   this.infectedPeopleNotification([Math.random().toString()]);
+    // }, 2000);
 
     PushNotifications.addListener('registration', data => {
       // alert(JSON.stringify(data));
@@ -56,13 +57,19 @@ export class PushService {
       'pushNotificationReceived',
       (notification: PushNotification) => {
         console.log('notification ' + JSON.stringify(notification));
+        // this.infectedPeopleNotification([Math.random().toString()]);
+        BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - 5 * 60 * 1000 }).then(list => {
+          if(list.map(i => i.deviceId).indexOf(notification.data.signature) > -1){
+            this.changeStatus(Status.POTENTIALLY_INFECTED);
+          }
+        });
       }
     );
   }
 
-  infectedPeopleNotification(infectedPeople: string[]) {
+  changeStatus(status: Status) {
     this.listeners.forEach(listener => {
-      listener(infectedPeople);
+      listener(status);
     });
   }
 }
