@@ -4,7 +4,7 @@ Find out if you were in contact with someone that was tested positive.
 
 ## What it does
 
-Please read our post on [Devpost](https://devpost.com/software/wetrace-g9ocyi) for more information about what the app does.
+Please read our post on [WeTrace on Devpost](https://devpost.com/software/wetrace-g9ocyi) for more information about what the app does.
 
 ## Getting Started
 
@@ -21,9 +21,9 @@ For `android` you will need `Android Studio`.
 ### Installing
 
 ```
-git clone https://github.com/AndreasGassmann/contact-tracer
+git clone https://github.com/AndreasGassmann/WeTrace
 
-cd contact-tracer
+cd WeTrace
 
 npm install # To install all the dependencies
 
