@@ -22,6 +22,13 @@
     }
 }
 
+- (void)getOwnDeviceUUID:(CAPPluginCall *)call {
+    NSString *UUID = [[ContactsLogger sharedInstance] deviceUUID].UUIDString;
+    NSDictionary *result = @{@"result": UUID};
+    CAPPluginCallResult *pluginResult = [[CAPPluginCallResult alloc] init:result];
+    call.successHandler(pluginResult, call);
+}
+
 @end
 
 @interface BLETracerPlugin (CAPPluginCategory) <CAPBridgedPlugin>
@@ -32,6 +39,7 @@
 + (NSArray *)pluginMethods {
     NSMutableArray *methods = [NSMutableArray new];
     [methods addObject:[[CAPPluginMethod alloc] initWithName:@"getCloseContacts" returnType:@"promise"]];
+    [methods addObject:[[CAPPluginMethod alloc] initWithName:@"getOwnDeviceUUID" returnType:@"promise"]];
     return methods;
 }
 

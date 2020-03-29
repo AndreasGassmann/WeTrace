@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreBluetooth/CoreBluetooth.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ContactsLogger : NSObject
@@ -16,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // timeinterval is a unix timestamp in milliseconds.
 - (NSArray<NSDictionary<NSString *, id> *> *)closeContactsSince:(NSUInteger)timeinterval;
+
+- (CBUUID *)deviceUUID;
 
 @end
 

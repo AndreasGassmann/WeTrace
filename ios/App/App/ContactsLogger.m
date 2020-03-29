@@ -8,8 +8,6 @@
 
 #import "ContactsLogger.h"
 
-#import <CoreBluetooth/CoreBluetooth.h>
-
 #import "Contact.h"
 
 @interface ContactsLogger () <CBPeripheralManagerDelegate, CBCentralManagerDelegate>
