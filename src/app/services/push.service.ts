@@ -62,7 +62,7 @@ export class PushService {
           console.log('notification ' + JSON.stringify(notification));
           BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
             console.log('CHECKING', notification.data.signature, response.result);
-            if (response.result.map(i => i.deviceId).indexOf(notification.data.signature) > -1) {
+            if (response.result.map(i => i.deviceId).indexOf(notification.data.signature.toLowerCase()) > -1) {
               this.changeStatus(Status.POTENTIALLY_INFECTED);
             }
           });
