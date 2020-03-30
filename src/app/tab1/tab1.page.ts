@@ -44,9 +44,9 @@ export class Tab1Page {
         const unwrappedResponse = response.result.map(i => i.deviceId);
         console.log('unwrappedResponse', unwrappedResponse);
         console.log('reports', reports);
-        for (let report in reports) {
+        for (const report in reports) {
           if (unwrappedResponse.indexOf(reports[report].signature.toLowerCase()) > -1) {
-            this.myReportId = reports[report].id
+            this.myReportId = reports[report].id;
             this.setStatus(Status.POTENTIALLY_INFECTED);
           }
         }
@@ -156,9 +156,25 @@ export class Tab1Page {
 
   public async showITestedPositiveAlert() {
     const alert = await this.alertController.create({
-      header: 'You have been tested positive!',
+      header: `You've been tested positive 😷`,
       message:
-        'By confirming you agree that an anonymous message about your result will be sent to our server.',
+        'By confirming, you agree that an anonymous message about your result will be sent to our server and other users will be notified. Optionally, you can share some extra information that will help users assess their level of exposure.',
+      inputs: [
+        {
+          name: 'checkbox1',
+          type: 'checkbox',
+          label: `Share location history`,
+          value: 'value1',
+          checked: true
+        },
+
+        {
+          name: 'checkbox2',
+          type: 'checkbox',
+          label: `Share time of contact`,
+          value: 'value2'
+        }
+      ],
       buttons: [
         {
           text: 'Cancel',
@@ -193,9 +209,9 @@ export class Tab1Page {
 
   public async showITestedNegativeAlert() {
     const alert = await this.alertController.create({
-      header: 'You have been tested positive!',
+      header: `You've been tested negative 🎉`,
       message:
-        'By confirming you agree that an anonymous message about your result will be sent to our server.',
+        `Congratulations! By confirming, your status will be switched to healthy again. `,
       buttons: [
         {
           text: 'Cancel',
@@ -220,9 +236,9 @@ export class Tab1Page {
 
   public async showIFeelGoodAgainAlert() {
     const alert = await this.alertController.create({
-      header: 'You are showing symptoms!',
+      header: `You've now been showing symptoms for 48 hours 🎉`,
       message:
-        'Your status will switch yellow, which means you shouldn\'t go out anymore.',
+        `If you have not shown any symptoms for 48 hours and about 2 weeks since your test have passed, you can mark yourself as healthy again.`,
       buttons: [
         {
           text: 'Cancel',
