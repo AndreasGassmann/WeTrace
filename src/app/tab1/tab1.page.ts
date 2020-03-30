@@ -43,19 +43,20 @@ export class Tab1Page {
 
     setTimeout(() => {
       this.http.get<any>('https://contacttracer.dev.gke.papers.tech/api/v1/reports/').toPromise().then(reports => {
-        BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
-          const unwrappedResponse = response.result.map(i => i.deviceId);
-          console.log('unwrappedResponse', unwrappedResponse);
-          console.log('reports', reports);
-          for (const report of reports) {
-            if (unwrappedResponse.indexOf(report.signature.toLowerCase()) > -1) {
-              this.myReportId = report.id;
-              this.setStatus(Status.POTENTIALLY_INFECTED);
-            }
-          }
-        });
+        this.setStatus(Status.POTENTIALLY_INFECTED);
+        // BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
+        //   const unwrappedResponse = response.result.map(i => i.deviceId);
+        //   console.log('unwrappedResponse', unwrappedResponse);
+        //   console.log('reports', reports);
+        //   for (const report of reports) {
+        //     if (unwrappedResponse.indexOf(report.signature.toLowerCase()) > -1) {
+        //       this.myReportId = report.id;
+        //       this.setStatus(Status.POTENTIALLY_INFECTED);
+        //     }
+        //   }
+        // });
       });
-    }, 500); // If we don't have it, it's faster than local storage
+    }, 1000); // If we don't have it, it's faster than local storage
 
 
     this.deviceProximityService.listeners.push(proximities => {
