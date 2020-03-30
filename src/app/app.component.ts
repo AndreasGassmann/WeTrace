@@ -28,7 +28,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.pushService.register();
-      if(this.platform.is('android')){
+      if (this.platform.is('android')) {
         Geolocation.requestPermissions();
       }
     });

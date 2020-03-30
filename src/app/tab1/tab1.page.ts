@@ -39,19 +39,22 @@ export class Tab1Page {
     private readonly cdr: ChangeDetectorRef
   ) {
 
-    this.http.get<any>('https://contacttracer.dev.gke.papers.tech/api/v1/reports/').toPromise().then(reports => {
-      BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
-        const unwrappedResponse = response.result.map(i => i.deviceId);
-        console.log('unwrappedResponse', unwrappedResponse);
-        console.log('reports', reports);
-        for (const report in reports) {
-          if (unwrappedResponse.indexOf(reports[report].signature.toLowerCase()) > -1) {
-            this.myReportId = reports[report].id;
-            this.setStatus(Status.POTENTIALLY_INFECTED);
+    setTimeout(() => {
+      this.http.get<any>('https://contacttracer.dev.gke.papers.tech/api/v1/reports/').toPromise().then(reports => {
+        BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
+          const unwrappedResponse = response.result.map(i => i.deviceId);
+          console.log('unwrappedResponse', unwrappedResponse);
+          console.log('reports', reports);
+          for (const report of reports) {
+            if (unwrappedResponse.indexOf(report.signature.toLowerCase()) > -1) {
+              this.myReportId = report.id;
+              this.setStatus(Status.POTENTIALLY_INFECTED);
+            }
           }
-        }
+        });
       });
-    });
+    }, 500); // If we don't have it, it's faster than local storage
+
 
     this.deviceProximityService.listeners.push(proximities => {
       console.log('Proximities length', proximities.length);
@@ -74,6 +77,7 @@ export class Tab1Page {
   }
 
   public async setStatus(status: Status) {
+    console.log('status', status);
     switch (status) {
       case Status.HEALTHY:
         this.status = Status.HEALTHY;
