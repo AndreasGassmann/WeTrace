@@ -8,6 +8,11 @@ import { Plugins, Capacitor } from '@capacitor/core';
 import { StorageService, StorageKey } from '../services/storage.service';
 const { BLETracerPlugin } = Plugins;
 
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+const TIME_TO_CHECK = 14 * DAY;
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -23,6 +28,7 @@ export class Tab1Page {
   recommendationDescription = '';
   recommendationImage = '';
   numberOfClosePeople = 0;
+  myReportId = -1;
 
   constructor(
     private readonly deviceProximityService: DeviceProximityService,
@@ -32,6 +38,21 @@ export class Tab1Page {
     private readonly http: HttpClient,
     private readonly cdr: ChangeDetectorRef
   ) {
+
+    this.http.get<any>('https://contacttracer.dev.gke.papers.tech/api/v1/reports/').toPromise().then(reports => {
+      BLETracerPlugin.getCloseContacts({ sinceTimestamp: new Date().getTime() - TIME_TO_CHECK }).then(response => {
+        const unwrappedResponse = response.result.map(i => i.deviceId);
+        console.log('unwrappedResponse', unwrappedResponse);
+        console.log('reports', reports);
+        for (let report in reports) {
+          if (unwrappedResponse.indexOf(reports[report].signature.toLowerCase()) > -1) {
+            this.myReportId = reports[report].id
+            this.setStatus(Status.POTENTIALLY_INFECTED);
+          }
+        }
+      });
+    });
+
     this.deviceProximityService.listeners.push(proximities => {
       console.log('Proximities length', proximities.length);
       this.numberOfClosePeople = proximities.length;
@@ -187,6 +208,7 @@ export class Tab1Page {
         {
           text: 'Yes',
           handler: () => {
+            this.http.delete('https://contacttracer.dev.gke.papers.tech/api/v1/reports/' + this.myReportId + '/').toPromise();
             this.setStatus(Status.HEALTHY);
           }
         }

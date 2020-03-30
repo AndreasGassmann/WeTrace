@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PushService } from './services/push.service';
 
+import { Plugins } from '@capacitor/core';
+const { Geolocation } = Plugins;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -25,6 +28,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.pushService.register();
+      if(this.platform.is('android')){
+        Geolocation.requestPermissions();
+      }
     });
   }
 }

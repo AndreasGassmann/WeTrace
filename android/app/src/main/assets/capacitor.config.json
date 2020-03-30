@@ -1,6 +1,6 @@
 {
   "appId": "ch.papersch.papers.contacttracer",
-  "appName": "WeTrace",
+  "appName": "contact-tracer",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
