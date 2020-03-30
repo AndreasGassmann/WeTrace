@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { DeviceProximityService } from '../services/device-proximity.service';
 import { PushService } from '../services/push.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Status } from '../Status';
 import { Plugins, Capacitor } from '@capacitor/core';
 import { StorageService, StorageKey } from '../services/storage.service';
+import { ModalContactMapPage } from '../modal-contact-map/modal-contact-map.page';
 const { BLETracerPlugin } = Plugins;
 
 const MINUTE = 60 * 1000;
@@ -35,6 +36,7 @@ export class Tab1Page {
     private readonly storageSerice: StorageService,
     private readonly pushService: PushService,
     private readonly alertController: AlertController,
+    private readonly modalController: ModalController,
     private readonly http: HttpClient,
     private readonly cdr: ChangeDetectorRef
   ) {
@@ -263,5 +265,12 @@ export class Tab1Page {
     });
 
     return alert.present();
+  }
+
+  public async openMapModal() {
+    const modal = await this.modalController.create({
+      component: ModalContactMapPage
+    });
+    return await modal.present();
   }
 }

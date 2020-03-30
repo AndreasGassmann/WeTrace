@@ -1,17 +1,16 @@
 <ion-content>
   <ion-row class="status--container ion-padding" [ngClass]="statusClass">
     <ion-col size="12">
-      <h3>{{ statusTitle }}</h3>
+      <h3>{{ statusTitle }} <ng-container *ngIf="status === 'symptoms'">
+          <ion-icon (click)="openMapModal()" name="alert-circle-outline"></ion-icon>
+        </ng-container>
+      </h3>
       <p>
         {{statusDescription}}
       </p>
     </ion-col>
 
-    <ion-col
-      *ngIf="numberOfClosePeople > 0"
-      size="12"
-      class="status--container__sub ion-no-padding"
-    >
+    <ion-col *ngIf="numberOfClosePeople > 0" size="12" class="status--container__sub ion-no-padding">
       <ion-card mode="ios">
         <ion-card-content>
           <ion-item lines="none">
@@ -45,13 +44,10 @@
           <p>
             {{recommendationDescription}}
           </p>
-          <ion-button fill="clear" class="ion-no-padding"
-            >More information</ion-button
-          >
+          <ion-button fill="clear" class="ion-no-padding">More information</ion-button>
         </ion-col>
         <ion-col size="5" class="ion-no-padding">
-          <img src="{{recommendationImage}}"
-        /></ion-col>
+          <img src="{{recommendationImage}}" /></ion-col>
       </ion-row>
     </div>
     <div class="divider--line"></div>
@@ -59,12 +55,7 @@
     <ion-row>
       <ng-container *ngFor="let button of statusAction">
         <ion-col>
-          <ion-button
-            color="primary"
-            size="block"
-            mode="ios"
-            (click)="button.action()"
-            >{{button.text}}
+          <ion-button color="primary" size="block" mode="ios" (click)="button.action()">{{button.text}}
           </ion-button>
         </ion-col>
       </ng-container>
@@ -77,22 +68,14 @@
       <ion-col size="12" class="ion-no-padding">
         <h1 class="ion-no-margin">25</h1>
       </ion-col>
-      <ion-col size="12"
-        ><img
-          src="/assets/img/chart-placeholder.svg"
-          style="width:100%;height:auto"
-      /></ion-col>
+      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
     </ion-row>
     <h6>Close contact in the last 14 days</h6>
     <ion-row>
       <ion-col size="12" class="ion-no-padding">
         <h1 class="ion-no-margin">491</h1>
       </ion-col>
-      <ion-col size="12"
-        ><img
-          src="/assets/img/chart-placeholder.svg"
-          style="width:100%;height:auto"
-      /></ion-col>
+      <ion-col size="12"><img src="/assets/img/chart-placeholder.svg" style="width:100%;height:auto" /></ion-col>
     </ion-row>
   </div>
 </ion-content>

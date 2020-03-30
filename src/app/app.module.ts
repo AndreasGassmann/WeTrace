@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ModalContactMapPage } from './modal-contact-map/modal-contact-map.page';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalContactMapPage
   ],
-  entryComponents: [],
+  entryComponents: [ModalContactMapPage],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
