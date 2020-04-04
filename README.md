@@ -16,7 +16,7 @@ The system we propose uses concepts used in privacy-first blockchain projects su
 - Users collect locally close contacts (<2m) on their device, together with the timestamp of when the contact happened and rough geolocation of where the contact happened.
 - In case of a infection report, only the users that have been in close contact will be notified, the central server cannot read those messages and has the sole purpose of relaying the message.
 - The user reporting the infection can decide whether he/she wants to:
-    1. report only the infeciton to the close contacts of the last 14 days
+    1. report only the infection to the close contacts of the last 14 days
     2. report the above _and_ the timestamp of when that close contact has taken place
     3. report the above _and_ the geolocation of where the close contact has taken place
 
